@@ -45,6 +45,15 @@ class MyAppState extends ChangeNotifier {
     print(favorites);
     notifyListeners();
   }
+
+  void removeFavorite(WordPair pair) {
+    if (!favorites.contains(pair)) {
+      // TODO: Figure out what exceptions exist in flutter
+      // else learn how to make exception modals
+    }
+    favorites.remove(pair);
+    notifyListeners();
+  }
 }
 
 
@@ -127,7 +136,10 @@ class FavoritesPage extends StatelessWidget {
         ),
         for (var pair in appState.favorites)
           ListTile(
-            leading: Icon(Icons.favorite),
+            leading: IconButton(
+              icon: Icon(Icons.favorite),
+              onPressed: () { appState.removeFavorite(pair); },
+            ),
             title: Text(pair.asLowerCase),
           ),
       ],
